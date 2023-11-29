@@ -6,9 +6,9 @@ let img;
 
 function preload() {
     classifier = ml5.imageClassifier('MobileNet');
-    img1 = loadImage('shark.jpg');
-    img2 = loadImage('moth.jpg');
-    img3 = loadImage('tree.jpg');
+    // img1 = loadImage('shark.jpg');
+    // img2 = loadImage('moth.jpg');
+    img3 = loadImage('https://cdn.glitch.global/6946b3f7-2ed9-4a5d-913b-ce4357cfffe4/moth.jpg?v=1701282225692');
 }
 
 
