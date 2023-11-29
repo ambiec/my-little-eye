@@ -1,34 +1,33 @@
-/*
-  This is your site JavaScript code - you can add interactivity!
-*/
+// Initialize the Image Classifier method with MobileNet. A callback needs to be passed.
+let classifier;
 
-// Print a message in the browser's dev tools console each time the page loads
-// Use your menus or right-click / control-click and choose "Inspect" > "Console"
-console.log("Hello 🌎");
+// A variable to hold the image we want to classify
+let img;
 
-/* 
-Make the "Click me!" button move when the visitor clicks it:
-- First add the button to the page by following the steps in the TODO 🚧
-*/
-const btn = document.querySelector("button"); // Get the button from the page
-if (btn) { // Detect clicks on the button
-  btn.onclick = function () {
-    // The 'dipped' class in style.css changes the appearance on click
-    btn.classList.toggle("dipped");
-  };
+function preload() {
+    classifier = ml5.imageClassifier('MobileNet');
+    img1 = loadImage('img/shark.jpg');
+    img2 = loadImage('img/moth.jpg');
+    img3 = loadImage('img/tree.jpg');
 }
 
 
-// ----- GLITCH STARTER PROJECT HELPER CODE -----
+function setup() {
+    createCanvas(400, 400);
+    classifier.classify(img3, gotResult);
+    image(img3, 0, 0);
+}
 
-// Open file when the link in the preview is clicked
-let goto = (file, line) => {
-  window.parent.postMessage(
-    { type: "glitch/go-to-line", payload: { filePath: file, line: line } }, "*"
-  );
-};
-// Get the file opening button from its class name
-const filer = document.querySelectorAll(".fileopener");
-filer.forEach((f) => {
-  f.onclick = () => { goto(f.dataset.file, f.dataset.line); };
-});
+// A function to run when we get any errors and the results
+function gotResult(error, results) {
+    // Display error in the console
+    if (error) {
+      console.error(error);
+    } else {
+      // The results are in an array ordered by confidence.
+      console.log(results);
+      createDiv(`Label: ${results[0].label}`);
+      createDiv(`Confidence: ${nf(results[0].confidence, 0, 2)}`);
+    }
+  }
+  
