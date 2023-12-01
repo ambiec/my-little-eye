@@ -20,8 +20,9 @@ app.listen(port, () => {
 app.get("/getResponse", (req, res) => {
   console.log("get response");
   //DB 3 fetch from the DB
-  db.get("madlibsResponse").then((madlibsData) => {
-    let obj = { data: madlibsData };
+  db.get("prompt").then((promptData) => {
+    let obj = { data: promptData };
     res.json(obj);
+    console.log(obj);
   });
 });
