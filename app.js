@@ -23,6 +23,5 @@ app.get("/getResponse", (req, res) => {
   db.get("prompt").then((promptData) => {
     let obj = { data: promptData };
     res.json(obj);
-    console.log(obj);
   });
 });
